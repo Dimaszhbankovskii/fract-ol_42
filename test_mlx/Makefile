@@ -1,4 +1,4 @@
-FRACTOL		=	fractol
+FRACTOL		=	picture
 
 CC			=	gcc
 CFLAGS		=	-Wall -Werror -Wextra
@@ -7,18 +7,15 @@ LIBRARIES	=	-L./libft -lft
 INCLUDES	=	-I./includes
 
 LIBFT		=	./libft/libft.a
-HEADER		=	./includes/fractol.h
+HEADER		=	./includes/test_mlx.h
 
 SRCS_DIR	=	srcs/
-SRCS_LIST	=	fractol.c \
-				draw_fractol.c \
-				get_color.c \
-				fractal_mandelbrot.c \
-				fractal_mandelbar.c \
+SRCS_LIST	=	main.c \
+				draw_obj.c \
+				make_obj.c \
+				utils.c \
 				mouse_control.c \
-				keyboard_control.c \
-				utils_1.c \
-				utils_2.c
+				keyboard_control.c
 SRCS		=	$(addprefix $(SRCS_DIR), $(SRCS_LIST))
 
 OBJS		=	$(patsubst %.c, %.o, $(SRCS_LIST))

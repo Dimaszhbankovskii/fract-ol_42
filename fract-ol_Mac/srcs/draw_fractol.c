@@ -17,7 +17,7 @@ void	draw_fractol(t_fractol *fractol)
 		{
 			fractol->vector = init_complex(fractol->min.re + x * fractol->unit_vector.re,
 			fractol->max.im - y * fractol->unit_vector.im);
-			iteration = init_mandelbrot(fractol);
+			iteration = fractol->formula_fractol(fractol);
 			color = get_color(iteration, fractol);
 			my_mlx_pixel_put(&fractol->image, x, y, color);
 			x++;

@@ -1,4 +1,4 @@
-#include "../includes/fractol.h"
+#include "../includes/test_mlx.h"
 
 t_complex	init_complex(double re, double im)
 {

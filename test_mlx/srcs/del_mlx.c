@@ -1,4 +1,4 @@
-#include "../includes/fractol.h"
+#include "../includes/test_mlx.h"
 
 typedef struct s_var
 {

@@ -39,13 +39,25 @@ typedef struct s_fractol
 	unsigned int	((*formula_fractol)(struct s_fractol *fractol));
 }				t_fractol;
 
+t_fractol		*malloc_fractol(void);
+void			free_fractol(t_fractol *fractol);
+int				error_mess(char *mess, t_fractol *fractol, int code_error);
 t_complex		init_complex(double re, double im);
-void			set_default_fractol(t_fractol *fractol);
 void			my_mlx_pixel_put(t_image *image, int x, int y, int color);
-void			draw_fractol(t_fractol *fractol);
-unsigned int	init_mandelbrot(t_fractol *fractol);
-int				get_color(unsigned int iteration, t_fractol *fractol);
+void			print_help_mess(void);
+
+
+int				zoom(int keycode, int x, int y, t_fractol *fractol);
 int				press_key(int keycode, t_fractol *fractol);
+
+void			set_default_fractol(t_fractol *fractol);
+void			draw_fractol(t_fractol *fractol);
+
+unsigned int	init_mandelbrot(t_fractol *fractol);
+unsigned int	init_mandelbar(t_fractol *fractol);
+
+int				get_color(unsigned int iteration, t_fractol *fractol);
+
 
 
 #endif

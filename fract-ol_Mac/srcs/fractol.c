@@ -1,9 +1,11 @@
 #include "../includes/fractol.h"
 
-unsigned int	(*get_fractol(char *name_fractol))(t_fractol *fractol)
+unsigned int	(*get_formula_fractol(char *name_fractol))(t_fractol *fractol)
 {
 	if (!ft_strcmp(name_fractol, "Mandelbrot"))
 		return (&init_mandelbrot);
+	else if (!ft_strcmp(name_fractol, "Mandelbar"))
+		return (&init_mandelbar);
 	else
 		return (0);
 }
@@ -30,31 +32,33 @@ static void	init_fractol(t_fractol *fractol, char *name_fractol)
 {
 	fractol->mlx = mlx_init();
 	if (!fractol->mlx)
-		exit (1);
+		exit(error_mess("Error: connection MLX\n", fractol, 2));
 	fractol->window = mlx_new_window(fractol->mlx, WIDTH, HEIGHT, name_fractol);
 	if (!fractol->window)
-		exit (2);
+		exit(error_mess("Error: create MLX Window\n", fractol, 3));
 	fractol->image.image = mlx_new_image(fractol->mlx, WIDTH, HEIGHT);
 	if (!fractol->image.image)
-		exit (3);
+		exit(error_mess("Error: create MLX Image\n", fractol, 4));
 	fractol->image.address = mlx_get_data_addr(fractol->image.image,
 	&fractol->image.bit_per_pixel, &fractol->image.line_length, &fractol->image.endian);
 	set_default_fractol(fractol);
-	fractol->formula_fractol = get_fractol(name_fractol);
-	mlx_hook(fractol->window, 2, 1L << 0, press_key, fractol);
+	fractol->formula_fractol = get_formula_fractol(name_fractol);
 }
 
 int	main(int argc, char **argv)
 {
-	t_fractol	fractol;
+	t_fractol	*fractol;
 
-	if (argc == 2 && get_fractol(argv[1]))
+	if (argc == 2 && get_formula_fractol(argv[1]))
 	{
-		init_fractol(&fractol, argv[1]);
-		draw_fractol(&fractol);
-		mlx_loop(fractol.mlx);
+		fractol = malloc_fractol();
+		init_fractol(fractol, argv[1]);
+		draw_fractol(fractol);
+		mlx_mouse_hook(fractol->window, zoom, fractol);
+		mlx_hook(fractol->window, 2, 1L << 0, press_key, fractol);
+		mlx_loop(fractol->mlx);
 	}
 	else
-		ft_putstr_fd("print data\n", 2);
+		print_help_mess();
 	return (0);
 }
