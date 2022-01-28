@@ -1,6 +1,6 @@
 #include "../includes/fractol.h"
 
-t_fractol *malloc_fractol(void)
+t_fractol	*malloc_fractol(void)
 {
 	t_fractol	*fractol;
 
@@ -9,6 +9,8 @@ t_fractol *malloc_fractol(void)
 		exit(error_mess("Error: malloc 'fractol'\n", NULL, 1));
 	fractol->mlx = NULL;
 	fractol->window = NULL;
+	fractol->image.image = NULL;
+	fractol->image.address = NULL;
 	return (fractol);
 }
 
@@ -16,10 +18,13 @@ void	free_fractol(t_fractol *fractol)
 {
 	if (fractol)
 	{
-		free (fractol->mlx);
+		if (fractol->image.image)
+			mlx_destroy_image(fractol->mlx, fractol->image.image);
+		if (fractol->window)
+			mlx_destroy_window(fractol->mlx, fractol->window);
+		if (fractol->mlx)
+			free (fractol->mlx);
 		fractol->mlx = NULL;
-		free (fractol->window);
-		fractol->window = NULL;
 		free (fractol);
 		fractol = NULL;
 	}
@@ -45,6 +50,7 @@ void	my_mlx_pixel_put(t_image *image, int x, int y, int color)
 {
 	char	*dst;
 
-	dst = image->address + (y * image->line_length + x * (image->bit_per_pixel / 8));
+	dst = image->address + (y * image->line_length + \
+	x * (image->bit_per_pixel / 8));
 	*(unsigned int *)dst = color;
 }

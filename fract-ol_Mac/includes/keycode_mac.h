@@ -3,18 +3,23 @@
 
 # define KEY_ESC 53
 # define DEFAULT_FRACTOL 15
-# define BRIGHT_UP 14
-# define BRIGHT_DOWN 12
+
+# define COLOR_SHIFT_RIGHT 14
+# define COLOR_SHIFT_LEFT 12
+# define COLOR_SHIFT_STEP 5
 
 # define MOUSE_SCROLL_UP 0x04
 # define MOUSE_SCROLL_DOWN 0x05
-# define ZOOM_IN 1.25
-# define ZOOM_OUT 0.75
+# define ZOOM_IN 1.5
+# define ZOOM_OUT 0.5
 
-# define MOVE_LEFT 0x00
-# define MOVE_RIGHT 0x02
-# define MOVE_UP 0x0D
-# define MOVE_DOWN 0x01
-# define STEP_MOVE 0.025
+# define MOVE_LEFT 0x7B
+# define MOVE_RIGHT 0x7C
+# define MOVE_UP 0x7E
+# define MOVE_DOWN 0x7D
+# define MOVE_STEP 0.1
+
+# define MAX_ITERATION_UP 24
+# define MAX_ITERATION_DOWN 27
 
 #endif

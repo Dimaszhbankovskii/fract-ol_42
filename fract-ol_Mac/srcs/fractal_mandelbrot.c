@@ -10,7 +10,7 @@ unsigned int	init_mandelbrot(t_fractol *fractol)
 	while (pow(z.re, 2) + pow(z.im, 2) <= 4 && \
 	iteration < fractol->max_iteration)
 	{
-		z = init_complex(pow(z.re, 2) - pow(z.im, 2) + fractol->vector.re,
+		z = init_complex(pow(z.re, 2) - pow(z.im, 2) + fractol->vector.re, \
 		2.0 * z.re * z.im + fractol->vector.im);
 		iteration++;
 	}

@@ -8,7 +8,8 @@ int	get_color(unsigned int iteration, t_fractol *fractol)
 	int		blue;
 
 	if (iteration + fractol->color_shift < fractol->max_iteration)
-		t = (double)(iteration + fractol->color_shift) / (double)fractol->max_iteration;
+		t = (double)(iteration + fractol->color_shift) \
+		/ (double)fractol->max_iteration;
 	else
 		t = (double)iteration / (double)fractol->max_iteration;
 	red = (int)(9 * (1 - t) * pow(t, 3) * 255);
