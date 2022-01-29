@@ -17,11 +17,11 @@ static int	check_valid_num(char *str)
 	int	i;
 
 	i = 0;
-	if (str && (str[i] == '.' || \
-	(str[i] == '0' && str[i + 1] && str[i] != '.')))
-		return (0);
 	if (str && str[i] == '-' && str[i + 1])
 		i++;
+	if (str && (str[i] == '.' || \
+	(str[i] == '0' && str[i + 1] && str[i + 1] != '.')))
+		return (0);
 	while (str && str[i] != '.' && str[i])
 	{
 		if (!ft_isdigit(str[i]))

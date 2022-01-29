@@ -67,5 +67,9 @@ void	print_help_mess(void)
 	ft_putstr_fd("\n  4. 'Celtic Perpendicular'\n", 1);
 	ft_putstr_fd("\n  5. 'Celtic Mandelbar'\n", 1);
 	ft_putstr_fd("-------------------------------------------------\n", 1);
+	ft_putstr_fd("Launch example: ./fractol Mandelbrot\n", 1);
+	ft_putstr_fd("-------------------------------------------------\n", 1);
+	ft_putstr_fd("The julia fractal can be run with two parameters.", 1);
+	ft_putstr_fd("\nLaunch example: ./fractol Julia -1.1 0.3\n", 1);
 	ft_putstr_fd("-------------------------------------------------\n", 1);
 }
