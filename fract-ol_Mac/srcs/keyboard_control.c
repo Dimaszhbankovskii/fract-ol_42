@@ -33,13 +33,13 @@ static void	change_color(int keycode, t_fractol *fractol)
 {
 	if (keycode == COLOR_SHIFT_RIGHT)
 	{
-		fractol->color_shift += COLOR_SHIFT_STEP;
+		fractol->color_shift += (unsigned char)(fractol->max_iteration / 10);
 		if ((unsigned int)fractol->color_shift > fractol->max_iteration)
 			fractol->color_shift = 0;
 	}
 	else if (keycode == COLOR_SHIFT_LEFT)
 	{
-		fractol->color_shift -= COLOR_SHIFT_STEP;
+		fractol->color_shift -= (unsigned char)(fractol->max_iteration / 10);
 		if ((unsigned int)fractol->color_shift > fractol->max_iteration)
 			fractol->color_shift = (unsigned char)fractol->max_iteration;
 	}
@@ -69,8 +69,7 @@ int	press_key(int keycode, t_fractol *fractol)
 {
 	if (keycode == KEY_ESC)
 	{
-		mlx_destroy_image(fractol->mlx, fractol->image.image);
-		mlx_destroy_window(fractol->mlx, fractol->window);
+		free_fractol(fractol);
 		exit (0);
 	}
 	else if (keycode == MOVE_UP || keycode == MOVE_DOWN || \

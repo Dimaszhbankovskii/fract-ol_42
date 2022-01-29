@@ -6,7 +6,6 @@
 
 # define COLOR_SHIFT_RIGHT 14
 # define COLOR_SHIFT_LEFT 12
-# define COLOR_SHIFT_STEP 5
 
 # define MOUSE_SCROLL_UP 0x04
 # define MOUSE_SCROLL_DOWN 0x05

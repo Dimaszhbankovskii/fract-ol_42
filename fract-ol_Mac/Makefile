@@ -12,6 +12,8 @@ HEADER_KEYS	=	./includes/keycode_mac.h
 
 SRCS_DIR	=	srcs/
 SRCS_LIST	=	fractol.c \
+				validation_input_data.c \
+				parsing_input_data.c \
 				draw_fractol.c \
 				get_color.c \
 				fractal_mandelbrot.c \

@@ -11,6 +11,7 @@ t_fractol	*malloc_fractol(void)
 	fractol->window = NULL;
 	fractol->image.image = NULL;
 	fractol->image.address = NULL;
+	fractol->argv = NULL;
 	return (fractol);
 }
 
@@ -18,13 +19,12 @@ void	free_fractol(t_fractol *fractol)
 {
 	if (fractol)
 	{
+		if (fractol->argv)
+			free_arr_char(fractol->argv);
 		if (fractol->image.image)
 			mlx_destroy_image(fractol->mlx, fractol->image.image);
 		if (fractol->window)
 			mlx_destroy_window(fractol->mlx, fractol->window);
-		if (fractol->mlx)
-			free (fractol->mlx);
-		fractol->mlx = NULL;
 		free (fractol);
 		fractol = NULL;
 	}

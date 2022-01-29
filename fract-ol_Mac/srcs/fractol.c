@@ -32,16 +32,23 @@ void	set_default_fractol(t_fractol *fractol)
 		fractol->max.re = fractol->min.re + \
 		(fractol->max.im - fractol->min.im) * WIDTH / HEIGHT;
 	}
-	fractol->k_julia = init_complex(-0.6, 0.5);
+	if (fractol->argc == 1)
+		fractol->k_julia = init_complex(-0.6, 0.5);
+	else if (fractol->argc == 2)
+		fractol->k_julia = init_complex(ft_atof(fractol->argv[1]), 0.5);
+	else if (fractol->argc == 3)
+		fractol->k_julia = init_complex(ft_atof(fractol->argv[1]), \
+		ft_atof(fractol->argv[2]));
 	fractol->color_shift = 0;
 }
 
-static void	init_fractol(t_fractol *fractol, char *name_fractol)
+static void	init_fractol(t_fractol *fractol)
 {
 	fractol->mlx = mlx_init();
 	if (!fractol->mlx)
-		exit(error_mess("Error: connection MLX\n", fractol, 2));
-	fractol->window = mlx_new_window(fractol->mlx, WIDTH, HEIGHT, name_fractol);
+		exit(error_mess("Error: connection MLX\n", fractol, 3));
+	fractol->window = mlx_new_window(fractol->mlx, WIDTH, HEIGHT, \
+	fractol->argv[0]);
 	if (!fractol->window)
 		exit(error_mess("Error: create MLX Window\n", fractol, 3));
 	fractol->image.image = mlx_new_image(fractol->mlx, WIDTH, HEIGHT);
@@ -51,17 +58,18 @@ static void	init_fractol(t_fractol *fractol, char *name_fractol)
 	&fractol->image.bit_per_pixel, &fractol->image.line_length, \
 	&fractol->image.endian);
 	set_default_fractol(fractol);
-	fractol->formula_fractol = get_formula_fractol(name_fractol);
+	fractol->formula_fractol = get_formula_fractol(fractol->argv[0]);
 }
 
 int	main(int argc, char **argv)
 {
 	t_fractol	*fractol;
 
-	if (argc == 2 && get_formula_fractol(argv[1]))
+	fractol = malloc_fractol();
+	if (validation_input_data(argc, argv))
 	{
-		fractol = malloc_fractol();
-		init_fractol(fractol, argv[1]);
+		parsing_input_data(argc, argv, fractol);
+		init_fractol(fractol);
 		draw_fractol(fractol);
 		mlx_mouse_hook(fractol->window, zoom, fractol);
 		mlx_hook(fractol->window, 2, 1L << 0, press_key, fractol);
@@ -70,6 +78,9 @@ int	main(int argc, char **argv)
 		mlx_loop(fractol->mlx);
 	}
 	else
+	{
+		free_fractol(fractol);
 		print_help_mess();
+	}	
 	return (0);
 }
