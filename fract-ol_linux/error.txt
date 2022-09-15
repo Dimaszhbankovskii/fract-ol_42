@@ -1,0 +1,5 @@
+1   ошибка выделения памяти на структуру fractol
+2   error parsing data
+3   Error: connection MLX
+4   Error: create MLX Window
+5   Error: create MLX Image
