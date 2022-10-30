@@ -70,6 +70,7 @@ $(LIBMLX) :
 
 clean :
 	@make clean -C ./libft
+	@make clean -C ./mlx_linux
 	@rm -rf $(OBJS_DIR)
 	@echo "$(VIOLET)Removing objects files$(WHITE) --> *.o --> $(GREEN)[Done]$(NORMAL)"
 
