@@ -11,6 +11,8 @@ LIBFT		=	./libft/libft.a
 HEADER		=	./includes/fractol.h
 HEADER_KEYS	=	./includes/keycode_linux.h
 
+LIBMLX			=	./mlx_linux/libmlx.a
+
 SRCS_DIR	=	srcs
 SRCS_LIST	=	fractol.c \
 				validation_input_data.c \
@@ -45,7 +47,7 @@ WHITE		=	\033[1;37m
 
 all : $(OBJS_DIR) $(FRACTOL)
 
-$(FRACTOL) : Makefile $(HEADER) $(HEADER_KEYS) $(LIBFT) $(OBJS)
+$(FRACTOL) : Makefile $(HEADER) $(HEADER_KEYS) $(LIBFT) $(LIBMLX) $(OBJS)
 	@$(CC) $(OBJS) $(MLXFLAGS) -o $@ $(LIBRARIES) $(INCLUDES)
 	@echo "$(GREEN)Project succesfully compiled$(NORMAL)"
 
@@ -61,6 +63,10 @@ $(OBJS_DIR)/%.o : $(SRCS_DIR)/%.c $(HEADER) $(HEADER_KEYS)
 $(OBJS_DIR) :
 	@mkdir -p objs
 	@echo "$(CYAN)Creating directory for objects file$(WHITE) --> $@ --> $(GREEN)[Done]$(NORMAL)"
+
+$(LIBMLX) :
+	@make -C ./mlx_linux
+	@echo "$(CYAN)'mlx' was compiled$(NORMAL)"
 
 clean :
 	@make clean -C ./libft
